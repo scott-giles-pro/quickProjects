@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 
 function MyBio() {
+    //date functions to compute age
     let dob = new Date("04/25/1977");
     let month_diff = Date.now() - dob.getTime();
     let age_dt = new Date(month_diff);
@@ -10,16 +11,28 @@ function MyBio() {
     console.log("month_diff: " + month_diff);
     console.log("age_dt: " + age_dt);
     console.log("age: " + age);
-
+    
+    //time functions for greeting of good morning/afternoon/evening
+    const greetingDate = new Date();
+    const greetingHours = greetingDate.getHours;
+    let timeOfDay;
+    if (greetingHours < 12) {
+        timeOfDay = "morning"
+    } else if (greetingHours >= 12 && greetingHours < 17) {
+        timeOfDay = "afternoon"
+    } else {
+        timeOfDay = "evening"
+    }
+    
+    //state and change handler for checkbox    
     const [isChecked, setIsChecked] = useState(false);
-
     const handleOnChange = () => {
         setIsChecked(!isChecked);
     };
     
     return (
         <div>
-            <h1>This is Scott</h1>
+            <h1 className="testHeader">Good {timeOfDay}, Scott</h1>
             <ul>
                 <li>Blonde har (shaved)</li>
                 <li>Blue eyes</li>
