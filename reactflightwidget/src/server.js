@@ -1,9 +1,10 @@
 const PORT = 8000
-const axios = require("axios").default
+const axios = require('axios').default
 const express = require('express')
-const app = express()
 const cors = require('cors')
 require('dotenv').config()
+
+const app = express()
 app.use(cors())
 
 app.get('/flights', (req, res) => {
@@ -11,11 +12,12 @@ app.get('/flights', (req, res) => {
         method: 'GET',
         url: 'https://toronto-pearson-airport.p.rapidapi.com/departures',
         headers: {
-            'X-RapidAPI-Key': process.env.RAPID_API_KEY,
-            'X-RapidAPI-Host': 'toronto-pearson-airport.p.rapidapi.com'
+          'x-rapidapi-key': process.env.REACT_APP_API_KEY,
+          'x-rapidapi-host': 'toronto-pearson-airport.p.rapidapi.com'
         }
-    }
-    axios.request(options).then(function (response) {
+      };
+      
+      axios.request(options).then(function (response) {
         console.log(response.data)
         res.json(response.data.slice(0,6))
     }).catch(function (error) {
@@ -23,4 +25,5 @@ app.get('/flights', (req, res) => {
     })
 })
 
-app.listen(PORT, () => console.log('running on PORT ' + PORT))
+app.listen(PORT, () => console.log('running on port ' + PORT))
+
